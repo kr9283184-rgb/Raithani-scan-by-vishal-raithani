@@ -1,0 +1,21 @@
+# Cloudflare WAF Bypass Techniques
+# ==================================
+# Each line: technique_name|description|implementation
+
+ORIGIN_IP_DISCOVERY|Discover origin IP via historical DNS, shodan, censys|custom
+HTTP_HEADER_BYPASS|Inject X-Forwarded-For: 127.0.0.1 to bypass|header
+X_REAL_IP_SPOOF|Set X-Real-IP to internal IP range|header
+X_ORIGINALING_IP|Use X-Originating-IP header bypass|header
+PARAMETER_POLLUTION|Duplicate GET/POST params to confuse WAF|param
+URL_ENCODING_DEEP|Triple URL encode payloads (%25252e%25252e)|encode
+UNICODE_NORMALIZATION|Use Unicode normalization tricks (%u002e)|encode
+CHUNKED_ENCODING|Split payload across chunked transfer encoding|chunked
+HTTP_METHOD_SWITCH|Switch between GET/POST/PUT/PATCH to evade rules|method
+JSON_CONTENT_TYPE|Send payload as application/json content type|content-type
+XML_CONTENT_TYPE|Wrap payload in XML|content-type
+MULTIPART_MIXING|Send param in both URL and multipart body|multipart
+REQUEST_DELAY|Add random delays between requests|timing
+USER_AGENT_ROTATION|Cycle through modern browser UAs|header
+CACHE_POISONING|Use cache-busting params to bypass edge rules|cache
+RATE_LIMIT_BYPASS|Slow down requests to avoid triggering rules|timing
+TLS_FINGERPRINT_ROTATION|Rotate TLS cipher suites|tls

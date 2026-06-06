@@ -1,0 +1,27 @@
+# Generic WAF Bypass Techniques
+# ==================================
+# Each line: technique_name|description|implementation
+
+URL_ENCODING_SINGLE|Single URL encode special characters|encode
+URL_ENCODING_DOUBLE|Double URL encode to bypass decoding layers|encode
+URL_ENCODING_TRIPLE|Triple URL encode for deep decoding chains|encode
+BASE64_ENCODING|Base64 encode payload where accepted|encode
+HEX_ENCODING_GENERIC|Hex encode entire payload string|encode
+MIXED_CASE_GENERIC|Randomize letter casing in keywords|payload
+COMMENT_INJECTION_GENERIC|Inject inline comments between keywords|payload
+WHITESPACE_MUTATION|Alternate between space, tab, newline|payload
+NULL_BYTE_GENERIC|Inject %00 to terminate WAF string parsing|payload
+BUFFER_OVERFLOW|Send long padding before payload|payload
+SMART_PADDING|Add benign padding around malicious parts|payload
+PARAMETER_POLLUTION_GENERIC|Add duplicate params to confuse inspection|param
+HTTP_METHOD_ALTERNATION|Alternate between GET, POST, PUT, PATCH|method
+CONTENT_TYPE_ROTATION|Cycle through content types|content-type
+USER_AGENT_CYCLE|Cycle through 50+ user agents|header
+REFERER_SPOOFING|Set Referer to trusted domain|header
+COOKIE_BASED_BYPASS|Embed payload in cookies where not inspected|cookie
+ACCEPT_ENCODING_MANIP|Alter Accept-Encoding to change response|header
+TIMING_BASED_EVASION|Add random timing jitter between requests|timing
+PROXY_ROTATION|Rotate through proxy list|proxy
+IPV6_TO_IPV4_BYPASS|Use IPv6 mapped IPv4 addresses (::ffff:127.0.0.1)|payload
+CIDR_BYPASS|Use CIDR notation for IP addresses|payload
+RANDOM_PARAM_ORDER|Randomize order of URL parameters|param

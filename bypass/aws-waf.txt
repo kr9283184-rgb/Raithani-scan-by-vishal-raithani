@@ -1,0 +1,14 @@
+# AWS WAF Bypass Techniques
+# ==================================
+# Each line: technique_name|description|implementation
+
+CASE_MUTATION_AWS|AWS WAF rules are case-sensitive, mutate case|payload
+HTML_ENCODING|Use HTML entity encoding to bypass string matches|encode
+UNICODE_ENCODING|Use full-width unicode characters (Ａ → A)|encode
+PARAMETER_ENCODING|Encode entire parameter values|encode
+JSON_CONTENT_TYPE|Send payloads as JSON to bypass SQLi/XSS rules|content-type
+LARGE_PAYLOAD_AWS|AWS WAF has body size limits, exceed them|chunked
+MULTIPART_FORM_DATA|Use multipart to bypass AWS WAF inspection|multipart
+HEADER_BASED_BYPASS|Inject headers AWS WAF doesn't inspect|header
+XSS_BYPASS_UTF7|Use UTF-7 encoding for XSS payloads|encode
+SQLI_BYPASS_NEGATIVE_MATCH|Use negative match conditions|payload

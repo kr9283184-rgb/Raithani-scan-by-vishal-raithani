@@ -1,0 +1,18 @@
+# ModSecurity WAF Bypass Techniques
+# ==================================
+# Each line: technique_name|description|implementation
+
+COMMENT_INJECTION|Inject SQL/XML comments to break signatures|payload
+CASE_MUTATION|Randomize case in payload keywords|payload
+NULL_BYTE_INJECTION|Append null bytes (%00) to terminate string parsing|payload
+CRLF_INJECTION|Use CRLF (%0d%0a) to break WAF parsing|payload
+WHITESPACE_VARIATION|Use tabs (%09), newlines (%0a), formfeeds (%0c)|payload
+HEX_ENCODING|Encode payload portions as hex|encode
+UNICODE_ESCAPE|Use unicode escapes for characters|encode
+PROTOCOL_VIOLATION|Send malformed HTTP requests|http
+CONTENT_TYPE_MISMATCH|Declare one content-type, send another|content-type
+TRANSFER_ENCODING_CHUNKED|Use chunked TE to obfuscate body content|chunked
+CHUNK_SIZE_MANIPULATION|Use irregular chunk sizes in TE|chunked
+BOUNDARY_POLLUTION|Confuse multipart boundary parsing|multipart
+LARGE_PAYLOAD_SPLIT|Split payload across multiple packets|tcp
+SSL_TUNNELING|Use CONNECT method to tunnel requests|method

